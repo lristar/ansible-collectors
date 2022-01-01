@@ -1,0 +1,33 @@
+## import_tasks 和include_tasks最大的区别是
+## import_tasks是在执行job前就加载，
+## include_tasks是执行完之后再加载
+
+---
+# tasks file for consul-update
+- name: update consul
+  include_tasks: consul-update.yml
+
+
+
+---
+- name: windowpost scripts
+  tags:
+    - copy_windowScript
+  import_tasks: window-post-scripts.yml
+  when: command is defined and command|regex_search(".*window_post.*")
+- name: windowpost scripts
+  tags:
+    - copy_windowScript
+  import_tasks: window-post-scripts.yml
+  when: command is defined and command|regex_search(".*window_post.*")
+
+- name: init file and configs
+  tags:
+    - init_configs
+  import_tasks: init_config.yml
+  when: command is defined
+- name: update lotus exporter
+  tags:
+    - update_lotus_exporter
+  import_tasks: update_lotus_exporter.yml
+  when: command is defined

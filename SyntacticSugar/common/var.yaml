@@ -1,0 +1,11 @@
+---
+- name: set var
+  vars:
+    TagString: "{{ lookup('template', 'consul-add.j2') }}"  ## 利用jinja2来修饰变量
+
+
+---
+- name: set var
+  vars:
+    hostname: "lzy"
+    Path: "halo"

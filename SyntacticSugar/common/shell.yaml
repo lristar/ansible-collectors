@@ -1,0 +1,23 @@
+---
+- hosts: myComputers
+  tasks:
+    - name: Run scripts
+      shell: |
+        "{{ item }} "
+      with_items:
+        - "~/桌面/script1.sh -f add1"
+        - "~/桌面/script2.sh -f add2"
+        - "~/桌面/script3.sh -f add3"
+
+
+chdir：执行命令前，切换到该目录
+creates：当该文件存在时，不执行该步骤
+executable：使用shell环境执行脚本
+free_from：需要执行的脚本
+removes：当该文件不存在时，不执行该步骤
+warn：如果在ansible.cfg中存在告警，如果设定了false，不会告警此行
+
+
+
+
+
