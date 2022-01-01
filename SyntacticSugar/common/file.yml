@@ -40,13 +40,3 @@
             - /home/lzy/桌面/dockerUbuntu
 
      #   with_filelob
-
-      sudo apt update
-      sudo apt install python3-pip -y
-      pip3 install ansible==2.9.12 --user  -i https://pypi.douban.com/simple/
-      # 报错则需要在机器上手动安装setuptools
-      # pip3 install -U pip setuptools
-      # 目录创建在当前用户~/.local/bin/，不会污染其它用户
-      # 编辑当前~/.bashrc或~/.zshrc，加入环境变量
-      ANSIBLE_PATH=~/.local/bin/
-      PATH=$PATH:$ANSIBLE_PATH
