@@ -1,0 +1,33 @@
+---
+- hosts: myComputers
+  tasks:
+    - name: Run scripts1
+      shell: "~/桌面/script1.sh"
+      register: rslt
+    - name: Run scripts2
+      shell: "~/桌面/script2.sh"
+      when:
+        - rslt.failed == true
+    - name: Run scripts3
+      shell: "~/桌面/script3.sh"
+      when:
+        - rslt.failed == false
+    - name: test when 正则判断
+      shell: |
+        echo {{lotus_role}}
+      with_items:
+        - ".*window_post.*"
+      when: lotus_role| regex_search(item)
+
+
+  // 判读变量是否存在
+---
+- hosts: all
+  tasks:
+    - name: use when register exist
+      shell: |
+        echo "start" > ~/test/files2/start
+      when: enableStart is defined  // 如果变量被定义就执行这个  is undefined是没被定义则执行
+
+  多条件用and
+when: enableStart is defined and enableStart is defined

@@ -1,0 +1,16 @@
+---
+# handlers file for init_lotus
+- name: restart lotus_exporter
+  become: true
+  systemd:
+    name: lotus_exporter
+    state: restarted
+    daemon_reload: yes
+    enabled: True
+- name: restart lotus_exporter_9128
+  become: true
+  systemd:
+    name: lotus_exporter_9128
+    state: restarted
+    daemon_reload: yes
+    enabled: True%

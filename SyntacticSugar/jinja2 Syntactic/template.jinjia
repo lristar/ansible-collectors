@@ -1,0 +1,35 @@
+## 基础
+{% … %} 语句（[Statements](http://jinja.pocoo.org/docs/dev/templates/#list-of-control-structures)）
+{{ … }} 打印模板输出的表达式（[Expressions](http://jinja.pocoo.org/docs/dev/templates/#expressions)）
+{# … #} 注释
+ # … ## 行语句（[Line Statements](http://jinja.pocoo.org/docs/dev/templates/#line-statements)）
+
+## 表达式内的方法集  set 定义变量
+{% set lists = Tags.split(',') %}
+{% set data = lists|join('","') %}
+{% set tags = '"'+data+'"' %}
+
+
+
+## 逻辑判断
+{% if ... %}
+逻辑1
+{% elif ... %}
+逻辑2
+{% else %}
+逻辑3
+{% endif %}
+
+## 循环
+{% for item in 列表 %}
+
+{{loop.index}}表示当前是第几次循环，从1开始
+
+{% endfor %}
+
+## 循环参数
+loop.index	当前迭代索引(从1开始)
+loop.index()	当前迭代索引(从0开始)
+loop.first	是否第一次迭代，返回True或False
+loop.last	是否最后一次迭代，返回True或False
+loop.length	序列的长度

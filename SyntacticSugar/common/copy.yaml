@@ -1,0 +1,9 @@
+- name: local-copy
+  copy:
+    src: /home/lzy/桌面/testDockerfile/dockerUbuntu  #原文件目录
+    dest: /home/lzy/桌面/  # 复制后的目录
+    group: lzy  #属组
+    mode: u+rw
+    owner: lzy #属主
+    backup: yes
+  notify: "{{ handlerTest }}"  ## 对应handlers目录里面的main.yml中的job的name

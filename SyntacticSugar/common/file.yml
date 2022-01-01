@@ -1,0 +1,42 @@
+---
+- hosts: all
+  tasks:
+    - name: Async file
+      synchronize:   ## 同步文件夹内容
+        src: ~/scripts/helper
+        dest: ~/
+        compress: no
+        archive: no
+        recursive: yes
+        delete: yes
+
+    - name: Get remote helper file
+      find:  ## find 模块可以帮助我们在被管理主机中查找符合条件的文件，就像 find 命令一样。
+        paths: ~/helper
+      register: helper_path
+    - name: Adding +x to helper
+      file: dest="{{ item.path }}" mode=a+x
+      with_items: "{{ helper_path.files }}"
+
+
+    - name: touch /etc/docker/daemon.json
+      file:  ## file模块 创建文件等操作
+        path: /etc/docker/daemon.json
+        state: touch
+        #touch 创建文件  directory 创建目录
+        owner: lzy
+        group: lzy
+        mode: 0755
+
+
+        with_file是for文件的内容
+        with_filelob是for文件名
+        tasks目录内的编写格式
+
+        with_file
+        - name: withfilehahaha
+          shell: echo "{{item}}" >>/home/lzy/桌面/testfile.log ##item是文件的一行的内容
+          with_file:
+            - /home/lzy/桌面/dockerUbuntu
+
+        with_filelob了

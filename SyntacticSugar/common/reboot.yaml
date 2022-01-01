@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars:
+    dest_version: "{{ VERSION | default('18.04') }}"
+  tasks:
+    - name: Reboot after upgrade
+      become: true
+      reboot:  ##重启设定模块
+        reboot_timeout: 3600
+        post_reboot_delay: 60
+        msg: "reboot now"
+        test_command: whoami
+      tags:
+        - reboot

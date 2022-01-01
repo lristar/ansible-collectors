@@ -1,0 +1,36 @@
+---
+- name: 安装pkg
+  hosts: servera.lab.example.com
+  tasks:
+    - name: install_pkg
+      yum:   ## centos安装方式
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - httpd
+        - firewalld
+        - mariadb-server
+        - php
+        - php-mysqlnd
+
+
+## ubuntu安装
+---
+- hosts: all
+  tasks:
+    - name: install dep
+      become: true
+      apt:  ## ubuntu安装方式
+        name:
+          - python3-pip
+    - name: install ansible
+      shell: |
+        pip3 install -U pip setuptools
+        pip3 install ansible==2.9.12 --user  -i https://pypi.douban.com/simple/
+    - name: insert path
+      blockinfile:
+        create: yes
+        path: ~/.zshrc
+        block: |
+          ANSIBLE_PATH=~/.local/bin/
+          PATH=$PATH:$ANSIBLE_PATH
