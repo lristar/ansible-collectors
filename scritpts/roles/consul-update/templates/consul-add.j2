@@ -1,0 +1,5 @@
+{% set lists = Tags.split(',') %}
+{% set data = lists|join('","') %}
+{% set tags = '"'+data+'"' %}
+
+{"ID":"{{ansible_ssh_host}}-{{item}}","Name":"{{ansible_ssh_host}}-{{item}}","Tags":[{{tags}},"{{Cluster}}"],"Address":"{{ansible_ssh_host}}","Port":{{item}},"Meta":{"Cluster":"{{Cluster}}","LotusNode":"{{LotusNode}}","hostname":"{{ansible_ssh_host}}"},"EnableTagOverride":false,"Weights":{"Passing":10,"Warning":1}}

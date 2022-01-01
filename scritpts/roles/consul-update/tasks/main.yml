@@ -1,0 +1,4 @@
+---
+# tasks file for consul-update
+- name: update consul
+  include_tasks: consul-update.yml

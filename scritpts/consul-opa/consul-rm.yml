@@ -1,0 +1,8 @@
+---
+- hosts: galaxy191
+  tasks:
+    - name: del all consul
+      shell: |
+        curl --request PUT  http://{{consul_server}}:8500/v1/agent/service/deregister/{{HostName}}-{{item}}
+      with_items:
+        - "{{port_all}}"

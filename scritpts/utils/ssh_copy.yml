@@ -1,0 +1,8 @@
+---
+- hosts: all
+  user: xg
+  tasks:
+    - name: ssh-copy
+      authorized_key: user=xg key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    - name: ssh-root-copy
+      authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

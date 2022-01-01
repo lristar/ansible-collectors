@@ -1,0 +1,21 @@
+---
+- name: del all consul
+  shell: |
+    curl --request PUT  http://{{consul_server}}:8500/v1/agent/service/deregister/{{ansible_ssh_host}}-{{item}}
+  with_items:
+    - "{{port_all}}"
+- name: add common consul
+  vars:
+    TagString: "{{ lookup('template', 'consul-add.j2') }}"
+  shell: |
+    curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{{TagString}}' 'http://{{consul_server}}:8500/v1/agent/service/register'
+  with_items:
+    -  "{{Port}}"
+- name: add other consul
+  vars:
+    TagString: "{{ lookup('template', 'other-consul-add.j2') }}"
+  shell: |
+    curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{{TagString}}' 'http://{{consul_server}}:8500/v1/agent/service/register'
+  with_items:
+    -  "{{otherPorts}}"
+  when: otherPorts is defined and otherTags is defined
